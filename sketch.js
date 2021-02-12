@@ -21,6 +21,8 @@ function setup(){
 
      ball=createSprite(random(20,750),250,10,10);
      ball.shapeColor="white"
+     ball.velocityX = 4;
+    ball.velocityY = 9;
 
      //if(keyDown)
      
@@ -34,7 +36,27 @@ function setup(){
 function draw() {
     background("black");
     //create edgeSprite
+    edges=createEdgeSprites();
+    ball.bounceOff(edges)
+    if(s1.isTouching(ball)){
+        ball.shapeColor = "blue";
+        music.play();
+    }
 
+    if(s2.isTouching(ball) && ball.bounceOff(s2)){
+        ball.shapeColor = "yellow";
+        ball.velocityX = 0;
+        ball.velocityY = 0;
+        music.stop();
+    }
+
+    if(s3.isTouching(ball)){
+        ball.shapeColor = "pink";
+    }
+
+    if(s4.isTouching(ball)){
+        ball.shapeColor = "red";
+    }
 
 
     //add condition to check if box touching surface and make it box
